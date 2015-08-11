@@ -45,8 +45,8 @@ function World() {
     }
 
     this.events = function(event) {
-        var x = event.which || event.keyCode;
-        switch (x) {
+        var key = event.keyCode || event.which;
+        switch (key) {
             // Left
             case 37:
                 hero.move(-1);
@@ -56,7 +56,7 @@ function World() {
                 hero.move(+1);
                 break;
             default:
-                console.console.log("U broke evrythin");
+                console.log("U broke evrythin");
         }
         this.display();
     }
