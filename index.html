@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>1DGame</title>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="viewport" content="width=device-width" content="initial-scale=1">
-  <script src="hero.js" charset="utf-8"></script>
-  <script src="enemy.js" charset="utf-8"></script>
-  <script src="world.js" charset="utf-8"></script>
-  <script src="display.js" charset="utf-8"></script>
-  <script src="game.js" charset="utf-8"></script>
-  <style media="screen">
-    html, body{
-      margin: 0;
-      padding: 0;
-    }
-  </style>
+    <title>1DGame</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width" content="initial-scale=1">
+    <script src="hero.js" charset="utf-8"></script>
+    <script src="enemy.js" charset="utf-8"></script>
+    <script src="world.js" charset="utf-8"></script>
+    <script src="display.js" charset="utf-8"></script>
+    <script src="game.js" charset="utf-8"></script>
+    <style media="screen">
+        html, body{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 <body onload="play()" onresize="display.resize()" onkeydown="world.events(event)">
-  <canvas id="view" width="300" height="75">Là y'a le jeu. Mais y'a besoin de javascript, sinon il marche pas. :-(</canvas>
+    <canvas id="view" width="300" height="75">Là y'a le jeu. Mais y'a besoin de javascript, sinon il marche pas. :-(</canvas>
 </body>
 </html>

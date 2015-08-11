@@ -31,15 +31,23 @@ function Display(world) {
     	ctx.fillStyle = "black";
     	ctx.fillRect(0,0, ctx.canvas.width, ctx.canvas.height);
 
-        // Display line
-        for (var i = 0; i < 50; i++) {
-            pixelDisplay(i, "#444444");
-        }
-
-        // Display Enemies
+        // Display world
+        var ground = world.getGround();
         var enemies = world.getEnemies();
-        for (var i in enemies) {
-            pixelDisplay(enemies[i].getPosition(), enemies[i].getColor());
+        for (var i = 0; i < 50; i++) {
+            if (ground[i] == 1) {
+                pixelDisplay(i, "#aaaaaa");
+            } else if (ground[i] == 2) {
+                pixelDisplay(i, "#4444ee");
+            } else if (ground[i] == 3) {
+                pixelDisplay(i, "brown");
+            } else  {
+                pixelDisplay(i, "#444444");
+            }
+
+            if (typeof enemies[i] !== 'undefined') {
+                pixelDisplay(i, "green");
+            }
         }
 
         // Display Hero
