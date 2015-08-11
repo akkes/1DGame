@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>1DGame</title>
+  <script src="hero.js" charset="utf-8"></script>
+  <script src="world.js" charset="utf-8"></script>
   <script src="game.js" charset="utf-8"></script>
   <style media="screen">
     html, body{
@@ -10,7 +12,7 @@
     }
   </style>
 </head>
-<body onload="play()" onresize="resize()">
+<body onload="play()" onresize="world.resize()" onkeypress="world.events(event)">
   <canvas id="view" width="300" height="75">Là y'a le jeu. Mais y'a besoin de javascript, sinon il marche pas. :-(</canvas>
 </body>
 </html>
