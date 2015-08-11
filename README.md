@@ -1,2 +1,2 @@
 # 1DGame
-Un pas7DpasRL
+Un pas7DpasRL sous CC-By-NC
