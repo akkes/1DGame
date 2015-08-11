@@ -3,9 +3,9 @@ function Hero() {
     var inventory;
 
     this.move = function(direction) {
-        if (direction == 1) {
+        if (direction === 1) {
             position++;
-        } else if (direction == -1) {
+        } else if (direction === -1) {
             position--;
         } else {
             console.console.log("U broke evrythin");

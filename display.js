@@ -38,15 +38,15 @@ function Display(world) {
             if (ground[i] == 1) {
                 pixelDisplay(i, "#aaaaaa");
             } else if (ground[i] == 2) {
-                pixelDisplay(i, "#4444ee");
+                pixelDisplay(i, "#2222aa");
             } else if (ground[i] == 3) {
-                pixelDisplay(i, "brown");
+                pixelDisplay(i, "#774400");
             } else  {
                 pixelDisplay(i, "#444444");
             }
 
             if (typeof enemies[i] !== 'undefined') {
-                pixelDisplay(i, "green");
+                pixelDisplay(i, "#44cc44");
             }
         }
 
