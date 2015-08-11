@@ -3,6 +3,7 @@ function World() {
     var pixSize;
     var pixHeight;
     var hero = new Hero();
+    var enemies = new Array();
 
     // Calculate line position & size
     this.position = function() {
@@ -29,10 +30,13 @@ function World() {
 
     	// Display line
     	for (var i = 0; i < 50; i++) {
-            pixelDisplay(i, "grey");
+            pixelDisplay(i, "#444444");
     	}
 
     	// Display Enemies
+        for (var i in enemies) {
+            pixelDisplay(enemies[i].getPosition(), enemies[i].getColor());
+        }
 
     	// Display Heroes
         pixelDisplay(hero.getPosition(), "white");
@@ -64,5 +68,9 @@ function World() {
     var pixelDisplay = function(position, color) {
         ctx.fillStyle = color;
         ctx.fillRect(position*pixSize, pixHeight, pixSize, pixSize);
+    }
+
+    this.enemyAdd = function(position) {
+        enemies.push(new Enemy(position));
     }
 }
