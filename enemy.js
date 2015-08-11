@@ -1,6 +1,5 @@
 function Enemy(position) {
     var position = position;
-    var baseColor = "green";
     var maxLife = 3;
     var life = 3;
 
@@ -8,7 +7,11 @@ function Enemy(position) {
         return position;
     }
 
-    this.getColor = function() {
-        return baseColor;
+    this.getLifeRatio = function() {
+        return life/maxLife;
+    }
+
+    this.getType = function() {
+        return "Goblin"
     }
 }

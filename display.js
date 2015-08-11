@@ -33,7 +33,7 @@ function Display(world) {
 
         // Display world
         var ground = world.getGround();
-        var enemies = world.getEnemies();
+        var entities = world.getEntities();
         for (var i = 0; i < 50; i++) {
             if (ground[i] == 1) {
                 pixelDisplay(i, "#aaaaaa");
@@ -45,14 +45,20 @@ function Display(world) {
                 pixelDisplay(i, "#444444");
             }
 
-            if (typeof enemies[i] !== 'undefined') {
-                pixelDisplay(i, "#44cc44");
+            if (!world.positionIsEmpty(i)) {
+                if(entities[i].getType() === "Goblin"){
+                    pixelDisplay(i, "#44cc44");
+                }
             }
         }
 
         // Display Hero
         var hero = world.getHero();
-        pixelDisplay(hero.getPosition(), "white");
+        if (hero.getWeapon() == "magic") {
+            pixelDisplay(hero.getPosition(), "#ffffdd");
+        } else {
+            pixelDisplay(hero.getPosition(), "white");
+        }
     }
 
     this.resize = function() {
