@@ -4,43 +4,42 @@ function World() {
     var ground = [];
 
     for (var i = 0; i < 50; i++) {
-        ground[i] = 0;
+        ground[i] = Math.random() * 2;
     }
 
-    ground[0] = 1;
-    ground[10] = 2;
-    ground[13] = 3;
-    ground[15] = 1;
+    ground[0] = 10;
+    ground[45] = 10;
 
     this.events = function(event) {
         var key = event.keyCode || event.which;
         switch (key) {
             // Left
             case 37:
-                if(this.positionIsEmpty(hero.getPosition()-1) && ground[hero.getPosition()-1] === 0) {
+                if(this.positionIsEmpty(hero.getPosition()-1)) {
                     hero.move(-1);
                 }
                 break;
             // Right
             case 39:
-                if(this.positionIsEmpty(hero.getPosition()+1) && ground[hero.getPosition()+1] === 0) {
+                if(this.positionIsEmpty(hero.getPosition()+1)) {
                     hero.move(+1);
                 }
                 break;
-            case 38:
-                hero.changeTool(+1);
-                break;
-            case 40:
-                hero.changeTool(-1);
+            case 32:
+                hero.wait();
                 break;
             default:
                 console.log("U broke evrythin, cos' u pressd: " + key);
+                return;
+        }
+        for (var i = 0; i < entities.length; i++) {
+            entities[i].move();
         }
         display.update();
     }
 
     this.enemyAdd = function(position) {
-        entities[position] = new Enemy(position);
+        entities.push(new Enemy(this, position));
     }
 
     this.getGround = function() {
@@ -56,6 +55,20 @@ function World() {
     }
 
     this.positionIsEmpty = function(position) {
-        return typeof entities[position] === 'undefined';
+        for (var i = 0; i < entities.length; i++) {
+            if (entities[i].getPosition() === position) {
+                entities[i].hit();
+                if (entities[i].getLifeRatio() === 0) {
+                    entities.splice(i, 1);
+                }
+                return false;
+            }
+        }
+
+        if (hero.getPosition() === position) {
+            hero.hit();
+            return false;
+        }
+        return ground[position] < 10;
     }
 }

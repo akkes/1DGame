@@ -1,4 +1,5 @@
-function Enemy(position) {
+function Enemy(world, position) {
+    var world = world;
     var position = position;
     var maxLife = 3;
     var life = 3;
@@ -13,5 +14,21 @@ function Enemy(position) {
 
     this.getType = function() {
         return "Goblin"
+    }
+
+    this.hit = function() {
+        life--;
+    }
+
+    this.move = function() {
+        if(world.getHero().getPosition() < position){
+            if (world.positionIsEmpty(position-1)) {
+                position--;
+            }
+        } else if(world.getHero().getPosition() > position) {
+            if (world.positionIsEmpty(position+1)) {
+                position--;
+            }
+        }
     }
 }

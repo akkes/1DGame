@@ -33,31 +33,30 @@ function Display(world) {
 
         // Display world
         var ground = world.getGround();
-        var entities = world.getEntities();
         for (var i = 0; i < 50; i++) {
-            if (ground[i] == 1) {
-                pixelDisplay(i, "#aaaaaa");
-            } else if (ground[i] == 2) {
-                pixelDisplay(i, "#2222aa");
-            } else if (ground[i] == 3) {
-                pixelDisplay(i, "#774400");
+            if (ground[i] === 10) {
+                pixelDisplay(i, "hsl(0, 0%, 80%)");
+            } else if (ground[i] === 20) {
+                pixelDisplay(i, "hsl(200, 50%, 33%)");
+            } else if (ground[i] === 30) {
+                pixelDisplay(i, "hsl(33, 50%, 33%)");
             } else  {
-                pixelDisplay(i, "#444444");
+                pixelDisplay(i, "hsl(0, 0%, " + (29+ground[i]) + "%)");
             }
+        }
 
-            if (!world.positionIsEmpty(i)) {
-                if(entities[i].getType() === "Goblin"){
-                    pixelDisplay(i, "#44cc44");
-                }
-            }
+        // Display entities
+        var entities = world.getEntities();
+        for (var i in entities) {
+            pixelDisplay(entities[i].getPosition(), "hsl(83, "+ entities[i].getLifeRatio()*80 +"%, "+ entities[i].getLifeRatio()*50 +"%)")
         }
 
         // Display Hero
         var hero = world.getHero();
         if (hero.getWeapon() == "magic") {
-            pixelDisplay(hero.getPosition(), "#ffffdd");
+            pixelDisplay(hero.getPosition(), "hsl(63, 100%, 90%)");
         } else {
-            pixelDisplay(hero.getPosition(), "white");
+            pixelDisplay(hero.getPosition(), "hsl(0, "+ (hero.getLifeRatio()*100) +"%,"+ (hero.getLifeRatio()*60+40) +"%)");
         }
     }
 
