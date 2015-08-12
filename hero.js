@@ -1,5 +1,5 @@
 function Hero() {
-    var position = 1;
+    var position = Math.ceil(Math.random()*40+3);
     var inventory = ["walk", "sword", "magic"];
     var weapon = 0;
     var maxLife = 10;

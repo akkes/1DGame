@@ -27,7 +27,7 @@ function Enemy(world, position) {
             }
         } else if(world.getHero().getPosition() > position) {
             if (world.positionIsEmpty(position+1)) {
-                position--;
+                position++;
             }
         }
     }
