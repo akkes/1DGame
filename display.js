@@ -48,7 +48,21 @@ function Display(world) {
         // Display entities
         var entities = world.getEntities();
         for (var i in entities) {
-            pixelDisplay(entities[i].getPosition(), "hsl(83, "+ entities[i].getLifeRatio()*80 +"%, "+ entities[i].getLifeRatio()*50 +"%)")
+            if (entities[i].getType() === "Goblin") {
+                pixelDisplay(entities[i].getPosition(), "hsl(83, "+ entities[i].getLifeRatio()*80 +"%, "+ entities[i].getLifeRatio()*50 +"%)")
+            } else if (entities[i].getType() === "Chest") {
+                pixelDisplay(entities[i].getPosition(), "hsl(35, 100%, 40%)")
+            } else if (entities[i].getType() === "Light") {
+                pixelDisplay(entities[i].getPosition(), "hsl(55, 100%, 55%)")
+            }
+        }
+
+        // Display entities
+        var objects = world.getObjects();
+        for (var i = 0; i < objects.length; i++) {
+            if (objects[i].getType() === "Light") {
+                pixelDisplay(objects[i].getPosition(), "hsl(55, 100%, 55%)")
+            }
         }
 
         // Display Hero

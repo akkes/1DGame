@@ -2,27 +2,36 @@ function World() {
     var hero = new Hero();
     var entities = [];
     var ground = [];
+    var objects = [];
 
+    // Define world
     for (var i = 0; i < 50; i++) {
         ground[i] = Math.random() * 2;
     }
-
     ground[0] = 10;
     ground[45] = 10;
+
+    // Add enemies
+    entities.push(new Enemy(this, Math.ceil(Math.random()*40+3)));
+    entities.push(new Enemy(this, Math.ceil(Math.random()*40+3)));
+    entities.push(new Enemy(this, Math.ceil(Math.random()*40+3)));
+
+    // Add chests
+    entities.push(new Chest(this, Math.ceil(Math.random()*40+3)));
 
     this.events = function(event) {
         var key = event.keyCode || event.which;
         switch (key) {
             // Left
             case 37:
-                if(this.positionIsEmpty(hero.getPosition()-1)) {
-                    hero.move(-1);
+                if(!hero.move(-1)) {
+                    return;
                 }
                 break;
             // Right
             case 39:
-                if(this.positionIsEmpty(hero.getPosition()+1)) {
-                    hero.move(+1);
+                if(!hero.move(+1)) {
+                    return;
                 }
                 break;
             case 32:
@@ -50,25 +59,64 @@ function World() {
         return entities;
     }
 
+    this.getObjects = function() {
+        return objects;
+    }
+
     this.getHero = function() {
         return hero;
     }
 
-    this.positionIsEmpty = function(position) {
+    this.IsThereAWall = function(position) {
+        return ground[position] >= 10;
+    }
+
+    this.IsThereAnEntity = function(position) {
         for (var i = 0; i < entities.length; i++) {
             if (entities[i].getPosition() === position) {
-                entities[i].hit();
-                if (entities[i].getLifeRatio() === 0) {
-                    entities.splice(i, 1);
-                }
-                return false;
+                return i;
             }
         }
 
+        return false;
+    }
+
+    this.IsThereAnObject = function(position) {
+        for (var i = 0; i < objects.length; i++) {
+            if (objects[i].getPosition() === position) {
+                return i;
+            }
+        }
+
+        return false;
+    }
+
+    this.IsThereTheHero = function(position) {
         if (hero.getPosition() === position) {
             hero.hit();
+            return true;
+        }
+
+        return false;
+    }
+
+    this.positionIsEmpty = function(position) {
+        if(this.IsThereAWall(position)){
             return false;
         }
-        return ground[position] < 10;
+
+        if(this.IsThereAnEntity(position)){
+            return false;
+        }
+
+        if(this.IsThereAnObject(position)){
+            return false;
+        }
+
+        if(this.IsThereTheHero(position)){
+            return false;
+        }
+
+        return true;
     }
 }

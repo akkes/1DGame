@@ -20,6 +20,10 @@ function Enemy(world, position) {
         life--;
     }
 
+    this.heal = function() {
+        life++;
+    }
+
     this.move = function() {
         if(world.getHero().getPosition() < position){
             if (world.positionIsEmpty(position-1)) {
